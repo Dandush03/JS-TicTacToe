@@ -1,0 +1,101 @@
+* {
+  box-sizing:border-box;
+}
+
+@keyframes clicked {
+  0% { transform: scale(0.0);}
+  50% { transform: scale(1.2);}
+  100% { transform: scale(1);}
+}
+
+body { 
+  margin:0;
+  padding:0;
+}
+
+.background {
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: absolute;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background > img {
+  width: 100%;
+  height: 100%;
+}
+
+.board {
+
+}
+
+.board > div {
+  display: flex;
+  width: 80%;
+}
+
+.board > div > span {
+  display: flex;
+  width: 33.33%;
+  border: white solid 20px;
+  height: 200px;
+  background: red;
+}
+
+.board > .row-1 > span {
+  height: 220px
+}
+
+
+.row-0 > span:nth-child(odd) {
+  border: none;
+}
+
+.row-0 > span:nth-child(even) {
+  border-top: none;
+  border-bottom: none;
+}
+
+.row-1 > span:nth-child(odd) {
+  border-left: none;
+  border-right: none;
+}
+
+.row-1:first-child {
+  border-left: none;
+  background: white;  
+}
+
+.row-2 > span:nth-child(odd) {
+  border: none;
+}
+
+.row-2 > span:nth-child(even) {
+  border-top: none;
+  border-bottom: none;
+}
+
+.svg-inline--fa.fa-w-11 {
+  width: 100%;
+  height: 100%
+}
+
+.svg-inline--fa.fa-w-16 {
+  width: 90%;
+  height: 85%;
+}
+
+i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: clicked;
+  animation-duration: 1s;
+}
+
+path {
+  fill: white;
+}
