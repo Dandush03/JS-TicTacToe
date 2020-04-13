@@ -12,6 +12,7 @@ function clicked() {
   clm = clm.split('-');
   clm = clm.pop();
   console.log(clm);
+
   console.log(row);
   if (turn.input === 'x') {
     this.innerHTML = '<i class="fas fa-times"></i>';
