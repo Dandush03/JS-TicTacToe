@@ -6,18 +6,20 @@ let turn = '';
 
 function validate(obj) {
   const msg = document.getElementById('msg-log');
-  const span = document.createElement('span');
+  let boolean = '';
+  msg.innerHTML = '';
+  const span = document.createElement('h2');
   if (obj.innerHTML === '') {
     span.innerHTML = `Great Move ${turn.name}!`;
-    span.setAttribute('class','good')
-  } else { span.innerHTML = `Can't you see ${turn.name}? This spot is taken. WRONG MOVE`; }
-    span.setAttribute('class','wrong')
-  if (turn === game.p1) {
-    turn = game.p2;
+    span.setAttribute('class', 'good');
+    boolean = true;
   } else {
-    turn = game.p1;
+    span.innerHTML = `Can't you see ${turn.name}? This spot is taken. WRONG MOVE`;
+    span.setAttribute('class', 'wrong');
+    boolean = false;
   }
   msg.appendChild(span);
+  return boolean;
 }
 
 function clicked() {
@@ -27,15 +29,14 @@ function clicked() {
   let clm = this.attributes.name.nodeValue;
   clm = clm.split('-');
   clm = clm.pop();
-  validate(this);
-  if (turn.input === 'x') {
+  if (turn.input === 'x' && validate(this)) {
     this.innerHTML = '<i class="fas fa-times"></i>';
     if (turn === game.p1) {
       turn = game.p2;
     } else {
       turn = game.p1;
     }
-  } else {
+  } else if (validate(this)) {
     this.innerHTML = '<i class="far fa-circle"></i>';
     if (turn === game.p1) {
       turn = game.p2;
