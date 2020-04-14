@@ -4,6 +4,22 @@ const Game = (p1, p2) => ({ p1, p2 });
 let game = '';
 let turn = '';
 
+function validate(obj) {
+  const msg = document.getElementById('msg-log');
+  const span = document.createElement('span');
+  if (obj.innerHTML === '') {
+    span.innerHTML = `Great Move ${turn.name}!`;
+    span.setAttribute('class','good')
+  } else { span.innerHTML = `Can't you see ${turn.name}? This spot is taken. WRONG MOVE`; }
+    span.setAttribute('class','wrong')
+  if (turn === game.p1) {
+    turn = game.p2;
+  } else {
+    turn = game.p1;
+  }
+  msg.appendChild(span);
+}
+
 function clicked() {
   let row = this.parentNode.className;
   row = row.split('-');
@@ -11,9 +27,7 @@ function clicked() {
   let clm = this.attributes.name.nodeValue;
   clm = clm.split('-');
   clm = clm.pop();
-  console.log(clm);
-
-  console.log(row);
+  validate(this);
   if (turn.input === 'x') {
     this.innerHTML = '<i class="fas fa-times"></i>';
     if (turn === game.p1) {
