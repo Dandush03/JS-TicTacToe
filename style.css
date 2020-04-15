@@ -235,3 +235,17 @@ form > div > div > div {
 h3 {
   margin-bottom: 0;
 }
+
+form + span {
+  margin-top: 20px;
+}
+
+.choise {
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.choise > button {
+  margin: 10px
+}
+
