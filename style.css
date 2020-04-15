@@ -1,44 +1,44 @@
 * {
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 @keyframes clicked {
-  0% { 
-    transform: scale(0.0);
+  0% {
+    transform: scale(0);
   }
-  50% { 
+  50% {
     transform: scale(1.2);
   }
-  100% { 
+  100% {
     transform: scale(1);
   }
 }
 
 @keyframes msg-animation {
-  0% { 
-    transform: scale(0.0);
+  0% {
+    transform: scale(0);
     bottom: 50%;
   }
 
-  50% { 
+  50% {
     transform: scale(1.2);
     bottom: 45%;
   }
 
-  80% { 
+  80% {
     transform: scale(1.2);
     bottom: 45%;
   }
 
-  100% { 
+  100% {
     transform: scale(1);
     bottom: -20%;
   }
 }
 
-body { 
-  margin:0;
-  padding:0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -81,9 +81,8 @@ body {
 }
 
 .board > .row-1 > span {
-  height: 240px
+  height: 240px;
 }
-
 
 .row-0 > span:nth-child(odd) {
   border: none;
@@ -101,7 +100,7 @@ body {
 
 .row-1:first-child {
   border-left: none;
-  background: white;  
+  background: white;
 }
 
 .row-2 > span:nth-child(odd) {
@@ -145,7 +144,7 @@ path {
 
 .msg {
   font-size: 130%;
-  width: 60%
+  width: 60%;
 }
 
 .msg > h2 {
@@ -158,4 +157,3 @@ path {
   position: absolute;
   bottom: -20%;
 }
-
