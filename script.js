@@ -117,7 +117,11 @@ function endGame() {
 
     const winningMsg = document.createElement('span');
     winningMsg.setAttribute('class', 'win-msg');
-    winningMsg.innerHTML = `And The Winner is ${player.name.toUpperCase()}!`;
+    if (winner() !== 'Tie') {
+      winningMsg.innerHTML = `And The Winner is ${player.name.toUpperCase()}!`;
+    } else {
+      winningMsg.innerHTML = 'It\'s a TIE! ! !';
+    }
     const board = document.getElementById('board');
     board.appendChild(winningMsg);
   }
@@ -149,7 +153,6 @@ function clicked() {
   }
   endGame();
 }
-
 
 window.onload = () => {
   const player1 = Player('Daniel', 'x');
