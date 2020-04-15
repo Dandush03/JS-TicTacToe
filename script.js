@@ -140,7 +140,7 @@ function endGame() {
 function Choices() {
   const board = document.getElementById('board');
   const div = document.createElement('div');
-  div.setAttribute('class', 'choise');
+  div.setAttribute('class', 'choice');
   const btn1 = document.createElement('button');
   btn1.innerHTML = 'Replay?';
   btn1.onclick = replay;
