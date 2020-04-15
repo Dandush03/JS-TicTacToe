@@ -1,49 +1,5 @@
 const Player = (name, input) => ({ name, input });
 
-const PlayerFrm = (number) => {
-  const main = document.createElement('div');
-  const lbl = document.createElement('label');
-  const container = document.createElement('div');
-  const title = document.createElement('h3');
-  main.appendChild(title);
-  main.id = 'players';
-  title.innerHTML = `Player ${number}`;
-  lbl.setAttribute('for', 'name');
-  lbl.innerHTML = 'Name';
-  container.appendChild(lbl);
-  const input = document.createElement('input');
-  input.setAttribute('name', 'name');
-  container.appendChild(input);
-  main.appendChild(container);
-  return main;
-};
-
-const gameStyle = (numberOfPlayer) => {
-  if (numberOfPlayer === 2) {
-    const frm = document.createElement('form');
-    const div = document.createElement('div');
-    div.appendChild(PlayerFrm(1));
-    div.appendChild(PlayerFrm(2));
-    frm.appendChild(div);
-    const btn = document.createElement('button');
-    btn.innerHTML = 'Submit';
-    frm.appendChild(btn);
-    const container = document.getElementById('msg-log');
-    container.appendChild(frm);
-  } else {
-    const frm = document.createElement('form');
-    const div = document.createElement('div');
-    div.appendChild(PlayerFrm(1));
-    div.setAttribute('class', 'solo');
-    frm.appendChild(div);
-    const btn = document.createElement('button');
-    btn.innerHTML = 'Submit';
-    frm.appendChild(btn);
-    const container = document.getElementById('msg-log');
-    container.appendChild(frm);
-  }
-};
-
 
 const Board = () => {
   const board = [[1, 2, 3], [1, 2, 3], [1, 2, 3]];
@@ -74,7 +30,7 @@ const Game = (p1, p2) => {
   };
 };
 
-let game = Game();
+let game = '';
 
 function playerInfo(player) {
   if (game.p1.input === player) {
@@ -152,6 +108,16 @@ function checkAvailableMovement() {
   return false;
 }
 
+function replay() {
+  location.reload(); // eslint-disable-line no-restricted-globals
+}
+
+function newGame() {
+  localStorage.removeItem('p1');
+  localStorage.removeItem('p2');
+  location.reload(); // eslint-disable-line no-restricted-globals
+}
+
 function endGame() {
   if (winner() !== '' || !checkAvailableMovement()) {
     const player = winner();
@@ -169,6 +135,17 @@ function endGame() {
     }
     const board = document.getElementById('board');
     board.appendChild(winningMsg);
+    const div = document.createElement('div');
+    div.setAttribute('class', 'choise');
+    const btn1 = document.createElement('button');
+    btn1.innerHTML = 'Replay?';
+    btn1.onclick = replay;
+    const btn2 = document.createElement('button');
+    btn2.innerHTML = 'New Game?';
+    btn2.onclick = newGame;
+    div.appendChild(btn1);
+    div.appendChild(btn2);
+    board.appendChild(div);
   }
 }
 
@@ -199,9 +176,88 @@ function clicked() {
   endGame();
 }
 
+const PlayerFrm = (number) => {
+  const main = document.createElement('div');
+  const lbl = document.createElement('label');
+  const container = document.createElement('div');
+  const title = document.createElement('h3');
+  const p = `player-${number}`;
+  main.appendChild(title);
+  main.id = p;
+  title.innerHTML = `Player ${number}`;
+  lbl.setAttribute('for', p);
+  lbl.innerHTML = 'Name';
+  container.appendChild(lbl);
+  const input = document.createElement('input');
+  input.setAttribute('name', p);
+  container.appendChild(input);
+  main.appendChild(container);
+  return main;
+};
+
+function validateFrm() {
+  return true;
+}
+
+function onSubmitFrV() {
+  if (validateFrm()) {
+    const frm = document.getElementById('player-2');
+    if (frm) {
+      let p1 = document.getElementsByName('player-1');
+      p1 = p1[0].value;
+      let p2 = document.getElementsByName('player-2');
+      p2 = p2[0].value;
+      localStorage.setItem('p1', JSON.stringify(p1));
+      localStorage.setItem('p2', JSON.stringify(p2));
+    } else {
+      let p1 = document.getElementsByName('player-1');
+      p1 = p1[0].value;
+      const p2 = 'bot';
+      localStorage.setItem('p1', JSON.stringify(p1));
+      localStorage.setItem('p2', JSON.stringify(p2));
+    }
+  } else {
+    return false;
+  }
+  return true;
+}
+
+const gameStyle = (numberOfPlayer) => {
+  if (numberOfPlayer === 2) {
+    const frm = document.createElement('form');
+    frm.onsubmit = onSubmitFrV;
+    const div = document.createElement('div');
+    div.appendChild(PlayerFrm(1));
+    div.appendChild(PlayerFrm(2));
+    frm.appendChild(div);
+    const btn = document.createElement('button');
+    btn.innerHTML = 'Submit';
+    frm.appendChild(btn);
+    const container = document.getElementById('msg-log');
+    container.appendChild(frm);
+  } else {
+    const frm = document.createElement('form');
+    frm.onsubmit = onSubmitFrV;
+    const div = document.createElement('div');
+    div.appendChild(PlayerFrm(1));
+    div.setAttribute('class', 'solo');
+    frm.appendChild(div);
+    const btn = document.createElement('button');
+    btn.innerHTML = 'Submit';
+    frm.appendChild(btn);
+    const container = document.getElementById('msg-log');
+    container.appendChild(frm);
+  }
+};
+
+
 window.onload = () => {
-  gameStyle(1);
-  const player1 = Player('Daniel', 'x');
-  const player2 = Player('Bot', 'o');
-  game = Game(player1, player2);
+  const p1 = JSON.parse(localStorage.getItem('p1'));
+  const p2 = JSON.parse(localStorage.getItem('p2'));
+  if (p1) {
+    game = Game(Player(p1, 'x'), Player(p2, 'o'));
+    game.board.show();
+  } else {
+    gameStyle(2);
+  }
 };
