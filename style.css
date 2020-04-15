@@ -181,16 +181,57 @@ path {
 
 .msg {
   font-size: 130%;
-  width: 60%;
 }
 
 .msg > h2 {
   display: inline-block;
   width: 100%;
-  text-align: center;
   animation-duration: 1s;
   animation-name: msg-animation;
   z-index: 3;
   position: absolute;
   bottom: -20%;
+}
+
+.msg,
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+form > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.solo {
+  justify-content: center;
+}
+
+form > button {
+  width: 120px;
+  margin-top: 50px;
+  align-self: center;
+  transform: scale(1.4);
+}
+
+form input {
+  border-radius: 5px;
+  text-align: center;
+  font-size: 120%;
+}
+
+form > div > div {
+  width: 40%;
+}
+
+form > div > div > div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+h3 {
+  margin-bottom: 0;
 }

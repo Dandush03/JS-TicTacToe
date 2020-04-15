@@ -1,5 +1,50 @@
 const Player = (name, input) => ({ name, input });
 
+const PlayerFrm = (number) => {
+  const main = document.createElement('div');
+  const lbl = document.createElement('label');
+  const container = document.createElement('div');
+  const title = document.createElement('h3');
+  main.appendChild(title);
+  main.id = 'players';
+  title.innerHTML = `Player ${number}`;
+  lbl.setAttribute('for', 'name');
+  lbl.innerHTML = 'Name';
+  container.appendChild(lbl);
+  const input = document.createElement('input');
+  input.setAttribute('name', 'name');
+  container.appendChild(input);
+  main.appendChild(container);
+  return main;
+};
+
+const gameStyle = (numberOfPlayer) => {
+  if (numberOfPlayer === 2) {
+    const frm = document.createElement('form');
+    const div = document.createElement('div');
+    div.appendChild(PlayerFrm(1));
+    div.appendChild(PlayerFrm(2));
+    frm.appendChild(div);
+    const btn = document.createElement('button');
+    btn.innerHTML = 'Submit';
+    frm.appendChild(btn);
+    const container = document.getElementById('msg-log');
+    container.appendChild(frm);
+  } else {
+    const frm = document.createElement('form');
+    const div = document.createElement('div');
+    div.appendChild(PlayerFrm(1));
+    div.setAttribute('class', 'solo');
+    frm.appendChild(div);
+    const btn = document.createElement('button');
+    btn.innerHTML = 'Submit';
+    frm.appendChild(btn);
+    const container = document.getElementById('msg-log');
+    container.appendChild(frm);
+  }
+};
+
+
 const Board = () => {
   const board = [[1, 2, 3], [1, 2, 3], [1, 2, 3]];
   const show = () => board.forEach((objs) => {
@@ -155,8 +200,8 @@ function clicked() {
 }
 
 window.onload = () => {
+  gameStyle(1);
   const player1 = Player('Daniel', 'x');
   const player2 = Player('Bot', 'o');
   game = Game(player1, player2);
-  game.board.show();
 };
