@@ -2,7 +2,6 @@
   box-sizing:border-box;
 }
 
-
 @keyframes clicked {
   0% { 
     transform: scale(0.0);
