@@ -1,3 +1,5 @@
+import '../stylesheet/style.scss';
+
 const Player = (name, input) => ({ name, input });
 
 const Board = () => {

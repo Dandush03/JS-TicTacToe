@@ -7,6 +7,7 @@
     "test": "jest",
     "w-jest": "jest --watch",
     "dev": "webpack --mode development",
+    "w-web": "webpack --watch --mode development",
     "build": "webpack --mode production"
   },
   "repository": {
