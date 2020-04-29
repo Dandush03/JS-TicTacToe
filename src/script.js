@@ -13,8 +13,8 @@ const Board = () => {
       span.innerHTML = '';
       div.appendChild(span);
     });
-    const gameboard = document.getElementById('board');
-    gameboard.appendChild(div);
+    const gameBoard = document.getElementById('board');
+    gameBoard.appendChild(div);
   });
   return { show, board };
 };
