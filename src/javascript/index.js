@@ -21,7 +21,6 @@ const Board = () => {
   return { show, board };
 };
 
-
 const Game = (p1, p2) => {
   const turn = p1;
   const board = Board();
@@ -153,7 +152,6 @@ function Choices() {
   div.appendChild(btn2);
   board.appendChild(div);
 }
-
 
 function clicked() {
   let row = this.parentNode.className;
@@ -309,5 +307,5 @@ window.onload = () => {
 };
 
 export {
-  Player, winner, Game, playerInfo,
+  Player, winner, Game, playerInfo, number,
 };
