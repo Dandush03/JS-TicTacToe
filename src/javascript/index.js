@@ -1,3 +1,5 @@
+import '../stylesheet/style.scss';
+
 const Player = (name, input) => ({ name, input });
 
 const Board = () => {
@@ -19,7 +21,6 @@ const Board = () => {
   return { show, board };
 };
 
-
 const Game = (p1, p2) => {
   const turn = p1;
   const board = Board();
@@ -31,7 +32,7 @@ const Game = (p1, p2) => {
 
 let game = '';
 
-function playerInfo(player) {
+function playerInfo(player, game) {
   if (game.p1.input === player) {
     return game.p1;
   }
@@ -40,27 +41,27 @@ function playerInfo(player) {
 
 const number = (value) => !Number.isNaN(Number(value));
 
-function winner() {
+function winner(game) {
   let movements = 9;
   const arr = game.board.board;
   for (let k = 0; k < 3; k += 1) {
     if (arr[k][0] === arr[k][1] && arr[k][1] === arr[k][2] && !number(arr[k][0])) {
-      return playerInfo(arr[k][0]);
+      return playerInfo(arr[k][0], game);
     }
     if (arr[0][k] === arr[1][k] && arr[0][k] === arr[2][k] && !number(arr[0][k])) {
-      return playerInfo(arr[0][k]);
+      return playerInfo(arr[0][k], game);
     }
     for (let z = 0; z < 3; z += 1) {
-      if (!number(arr[k][z])) {
+      if (!number(arr[k][z], game)) {
         movements -= 1;
       }
     }
   }
   if (arr[0][0] === arr[1][1] && arr[1][1] === arr[2][2] && !number(arr[0][0])) {
-    return playerInfo(arr[0][0]);
+    return playerInfo(arr[0][0], game);
   }
   if (arr[0][2] === arr[1][1] && arr[0][2] === arr[2][0] && !number(arr[0][2])) {
-    return playerInfo(arr[0][2]);
+    return playerInfo(arr[0][2], game);
   }
   if (movements === 0) {
     return 'Tie';
@@ -118,8 +119,8 @@ function newGame() {
 }
 
 function endGame() {
-  if (winner() !== '' || !checkAvailableMovement()) {
-    const player = winner();
+  if (winner(game) !== '' || !checkAvailableMovement()) {
+    const player = winner(game);
     const stopBoard = document.querySelectorAll('span[name^="clmn-"]');
     stopBoard.forEach((obj) => {
       obj.setAttribute('onClick', '');
@@ -127,7 +128,7 @@ function endGame() {
 
     const winningMsg = document.createElement('span');
     winningMsg.setAttribute('class', 'win-msg');
-    if (winner() !== 'Tie') {
+    if (winner(game) !== 'Tie') {
       winningMsg.innerHTML = `And The Winner is ${player.name.toUpperCase()}!`;
     } else {
       winningMsg.innerHTML = 'It\'s a TIE! ! !';
@@ -151,7 +152,6 @@ function Choices() {
   div.appendChild(btn2);
   board.appendChild(div);
 }
-
 
 function clicked() {
   let row = this.parentNode.className;
@@ -304,4 +304,8 @@ window.onload = () => {
   } else {
     gameMenu();
   }
+};
+
+export {
+  Player, winner, Game, playerInfo, number,
 };
