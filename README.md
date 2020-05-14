@@ -44,8 +44,8 @@ Feel free to check the [issues page](./issues/).
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Thanks to Microverse for it Support!
+- Hat tip to anyone who's code was used
+- Thanks to Microverse for its Support!
 
 ---
 
